@@ -4694,97 +4694,6 @@
 		  </False>
 		</System>
 	  </Item>
-
-	  <Item Type="CheckBox" Name="#不要播放Windows启动声音（by 闰月优葡）">
-		<Applicable>
-		  <OSVersion Compare="&lt;=">10.0.20348</OSVersion>
-		  <QueryServiceStart Name="AudioSrv"/>
-		  <Not>
-			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" Value="InstallationType" Type="REG_SZ" Data="Server"/>
-		  </Not>
-		</Applicable>
-		<System>
-		  <State>
-			<Applicable>
-			  <Or>
-				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
-				<And>
-				  <Not>
-					<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound"/>
-				  </Not>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
-				</And>
-			  </Or>
-			</Applicable>
-		  </State>
-		  <True>
-			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="1" Wow64="True"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
-			</Activate>
-		  </True>
-		  <False>
-			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="0" Wow64="True"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
-			</Activate>
-		  </False>
-		</System>
-	  </Item>
-
-	  <Item Type="CheckBox" Name="#不要播放Windows启动声音（by 闰月优葡）">
-		<Applicable>
-		  <OSVersion Compare=">=">10.0.22000</OSVersion>
-		  <QueryServiceStart Name="AudioSrv"/>
-		  <Not>
-			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" Value="InstallationType" Type="REG_SZ" Data="Server"/>
-		  </Not>
-		</Applicable>
-		<System>
-		  <State>
-			<Applicable>
-			  <Or>
-				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
-				<And>
-				  <Not>
-					<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound"/>
-				  </Not>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
-				</And>
-				<And>
-				  <Not>
-					<Or>
-					  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound"/>
-					  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound"/>
-					</Or>
-				  </Not>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="1"/>
-				</And>
-			  </Or>
-			</Applicable>
-		  </State>
-		  <True>
-			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="1"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" SkipError="2"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="1" Wow64="True"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" Wow64="True" SkipError="2"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
-			</Activate>
-		  </True>
-		  <False>
-			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="0"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" SkipError="2"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="0" Wow64="True"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" Wow64="True" SkipError="2"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
-			</Activate>
-		  </False>
-		</System>
-	  </Item>
 	</Group>
 
 	<Group Name="#安全和隐私相关设置">
@@ -7522,8 +7431,8 @@
 	  </Item>
 	</Group>
 
-	<Group Name="#鼠标键盘相关设置">
-	  <Item Type="CheckBox" Name="#切换鼠标左右键的功能（by 闰月优葡）">
+	<Group Name="#鼠标键盘相关设置（by 闰月优葡）">
+	  <Item Type="CheckBox" Name="#切换鼠标左右键的功能">
 		<Current>
 		  <State>
 			<Applicable>
@@ -7579,7 +7488,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#自动将鼠标指针贴靠到默认按钮（by 闰月优葡）">
+	  <Item Type="CheckBox" Name="#自动将鼠标指针贴靠到默认按钮">
 		<Current>
 		  <State>
 			<Applicable>
@@ -7618,7 +7527,7 @@
 		</Default>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#按NumLock/CapsLock/ScrollLock键时发出提示音（by 闰月优葡）">
+	  <Item Type="CheckBox" Name="#按NumLock/CapsLock/ScrollLock键时发出提示音">
 		<Applicable>
 		  <QueryServiceStart Name="AudioSrv"/>
 		</Applicable>
@@ -7667,6 +7576,287 @@
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\Control Panel\Accessibility\ToggleKeys" Value="Flags" Type="REG_SZ" Data="62"/>
 			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows NT\CurrentVersion\Accessibility" Value="Configuration" SkipError="2"/>
+			</Activate>
+		  </False>
+		</Default>
+	  </Item>
+	</Group>
+
+	<Group Name="#声音和音频设备相关设置（by 闰月优葡）">
+	  <Applicable>
+		  <QueryServiceStart Name="AudioSrv"/>
+	  </Applicable>
+	  <Item Type="CheckBox" Name="#不要播放Windows启动声音">
+		<Applicable>
+		  <OSVersion Compare="&lt;=">10.0.20348</OSVersion>
+		  <Not>
+			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" Value="InstallationType" Type="REG_SZ" Data="Server"/>
+		  </Not>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <Or>
+				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
+				<And>
+				  <Not>
+					<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound"/>
+				  </Not>
+				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
+				</And>
+			  </Or>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="0"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" Value="DisableStartupSound" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#不要播放Windows启动声音">
+		<Applicable>
+		  <OSVersion Compare=">=">10.0.22000</OSVersion>
+		  <Not>
+			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" Value="InstallationType" Type="REG_SZ" Data="Server"/>
+		  </Not>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <Or>
+				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
+				<And>
+				  <Not>
+					<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound"/>
+				  </Not>
+				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" Type="REG_DWORD" Data="1"/>
+				</And>
+				<And>
+				  <Not>
+					<Or>
+					  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound"/>
+					  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound"/>
+					</Or>
+				  </Not>
+				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="1"/>
+				</And>
+			  </Or>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="1"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" SkipError="2"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="0"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" SkipError="2"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" Value="UserSetting_DisableStartupSound" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Unattend" Value="DisableStartupSound" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableStartupSound" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#不要以受保护模式启动AudioDG进程">
+		<Applicable>
+		  <OSVersion Compare="&lt;=">10.0.10586</OSVersion>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" Type="REG_DWORD" Data="1"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Warning>#禁用此选项可能会导致某些声卡驱动出现兼容性问题！</Warning>
+			<Activate>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#始终以受保护模式启动AudioDG进程">
+		<Applicable>
+		  <OSVersion Compare=">=">10.0.14393</OSVersion>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG"/>
+			  <Not>
+				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" Type="REG_DWORD" Data="0"/>
+			  </Not>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项可能会导致某些声卡驱动出现兼容性问题！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" Type="REG_DWORD" Data="1"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#在声音控制面板中显示禁用的设备">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\System32\mmsys.cpl"/>
+		</Applicable>
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowHiddenDevices" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowHiddenDevices" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowHiddenDevices" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowHiddenDevices" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowHiddenDevices" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowHiddenDevices" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </False>
+		</Default>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#在声音控制面板中显示断开的设备">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\System32\mmsys.cpl"/>
+		</Applicable>
+		<Current>
+		  <State>
+			<Applicable>
+			  <Not>
+				<RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowDisconnectedDevices" Type="REG_DWORD" Data="0"/>
+			  </Not>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowDisconnectedDevices" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowDisconnectedDevices" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <Not>
+				<RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowDisconnectedDevices" Type="REG_DWORD" Data="0"/>
+			  </Not>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowDisconnectedDevices" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="ShowDisconnectedDevices" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </False>
+		</Default>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#在声音控制面板中用“分贝”显示音量">
+		<Applicable>
+		  <FileVersion FilePath="%SystemRoot%\System32\mmsys.cpl" Compare=">=">6.1</FileVersion>
+		</Applicable>
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="VolumeUnits" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="VolumeUnits" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="VolumeUnits" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="VolumeUnits" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="VolumeUnits" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Multimedia\Audio\DeviceCpl" Value="VolumeUnits" Type="REG_DWORD" Data="0"/>
 			</Activate>
 		  </False>
 		</Default>
@@ -13418,14 +13608,14 @@
 		  <True>
 			<Activate>
 			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate Restart="Explorer">
 			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="HiddenByDefault" Type="REG_DWORD" Data="0"/>
 			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
 			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF" Wow64="True"/>
@@ -13457,13 +13647,13 @@
 		  <True>
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\WOW6432NODE\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\WOW6432NODE\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="HiddenByDefault" Type="REG_DWORD" Data="0"/>
 			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
 			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF" Wow64="True"/>
@@ -13498,14 +13688,14 @@
 		  <True>
 			<Activate>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate Restart="Explorer">
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="HiddenByDefault" Type="REG_DWORD" Data="0"/>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" Value="HiddenByDefault" Type="REG_DWORD" Data="0" Wow64="True"/>
 			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
@@ -13524,10 +13714,7 @@
 		  <State>
 			<Applicable>
 			  <Or>
-				<And>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000" Wow64="True"/>
-				</And>
+				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
 				<And>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\Software\Microsoft\BuildLayers\DesktopEditions" Value="BuildNumber" Type="REG_DWORD" Compare=">=" Data="5867"/>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" Type="REG_DWORD" Data="1"/>
@@ -13540,9 +13727,11 @@
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" SkipError="2"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" Wow64="True" SkipError="2"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Wow64="True" SkipError="2"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="|" Data="100000"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="|" Data="100000" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
+			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="|" Data="100000"/>
+			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="|" Data="100000" Wow64="True"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -13550,9 +13739,11 @@
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" SkipError="2"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" Wow64="True" SkipError="2"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Wow64="True" SkipError="2"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
+			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
+			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF" Wow64="True"/>
 			</Activate>
 		  </False>
 		</System>
@@ -13568,10 +13759,7 @@
 		  <State>
 			<Applicable>
 			  <Or>
-				<And>
-				  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
-				  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000" Wow64="True"/>
-				</And>
+				<RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
 				<RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
 				<And>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\Software\Microsoft\BuildLayers\DesktopEditions" Value="BuildNumber" Type="REG_DWORD" Compare=">=" Data="5867"/>
@@ -13583,16 +13771,16 @@
 		  <True>
 			<Activate>
 			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate Restart="Explorer">
 			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
-			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
 			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" SkipError="2"/>
 			</Activate>
 		  </False>
@@ -13601,10 +13789,7 @@
 		  <State>
 			<Applicable>
 			  <Or>
-				<And>
-				  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
-				  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000" Wow64="True"/>
-				</And>
+				<RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
 				<RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
 				<And>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\Software\Microsoft\BuildLayers\DesktopEditions" Value="BuildNumber" Type="REG_DWORD" Compare=">=" Data="5867"/>
@@ -13616,15 +13801,16 @@
 		  <True>
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
+			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </True>
 		  <False>
-			<Activate>
+			<Activate Restart="Explorer">
 			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
-			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" SkipError="2"/>
 			</Activate>
 		  </False>
@@ -13633,10 +13819,7 @@
 		  <State>
 			<Applicable>
 			  <Or>
-				<And>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000" Wow64="True"/>
-				</And>
+				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
 				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
 				<And>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\Software\Microsoft\BuildLayers\DesktopEditions" Value="BuildNumber" Type="REG_DWORD" Compare=">=" Data="5867"/>
@@ -13654,18 +13837,20 @@
 		  <True>
 			<Activate>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="0" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate Restart="Explorer">
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" Type="REG_DWORD" Data="0"/>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" Value="HiddenByDefault" Type="REG_DWORD" Data="0" Wow64="True"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF" Wow64="True"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" SkipError="2"/>
+			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF"/>
+			  <RegWrite Key="HKEY_CLASSES_ROOT\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" Value="Attributes" Type="REG_DWORD" Operator="&amp;" Data="FFEFFFFF" Wow64="True"/>
 			</Activate>
 		  </False>
 		</System>
@@ -14017,7 +14202,7 @@
 			<Activate>
 			  <RegWrite Key="HKEY_CURRENT_USER\Software\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
 			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
-			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </True>
@@ -14025,7 +14210,7 @@
 			<Activate>
 			  <RegDelete Key="HKEY_CURRENT_USER\Software\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree"/>
 			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
-			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </False>
@@ -14041,14 +14226,14 @@
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
 			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
-			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate>
 			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree"/>
 			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
-			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Wow64="True" SkipError="2"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" SkipError="2"/>
 			</Activate>
 		  </False>
 		</Default>
@@ -14057,13 +14242,12 @@
 		  <State>
 			<Applicable>
 			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
 			  <Not>
 				<Or>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
 				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_BINARY" Compare="&amp;" Data="00001000"/>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000" Wow64="True"/>
-				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_BINARY" Compare="&amp;" Data="00001000" Wow64="True"/>
+				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_DWORD" Compare="&amp;" Data="100000"/>
+				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_BINARY" Compare="&amp;" Data="00001000"/>
 				</Or>
 			  </Not>
 			</Applicable>
@@ -14071,17 +14255,15 @@
 		  <True>
 			<Activate Restart="Explorer">
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Type="REG_DWORD" Data="1" Wow64="True"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{645FF040-5081-101B-9F08-00AA002F954E}" Value="HiddenByDefault" SkipError="2"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{645FF040-5081-101B-9F08-00AA002F954E}" Value="HiddenByDefault" Wow64="True" SkipError="2"/>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_BINARY" Data="40010020"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder" Value="Attributes" Type="REG_BINARY" Data="40010020" Wow64="True"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" Wow64="True"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432NODE\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" Value="System.IsPinnedToNameSpaceTree" SkipError="2"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
 			</Activate>
 		  </False>
@@ -21572,6 +21754,9 @@
 
 	<Group Name="#网络设置">
 	  <Item Type="CheckBox" Name="#关闭默认共享（by 518516.net）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanServer"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21600,6 +21785,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#禁止局域网中的“Null”会话发起访问（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanWorkstation"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21624,6 +21812,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#关闭防火墙（by 一叶微风TM）">
+		<Applicable>
+		  <QueryServiceStart Name="SharedAccess"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21741,6 +21932,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#在局域网中隐藏此计算机（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanServer"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21770,7 +21964,7 @@
 			</Applicable>
 		  </State>
 		  <True>
-			<Warning>#启用此选项可能会导致局域网中的其他计算机无法访问本机的共享文件！</Warning>
+			<Warning>#此选项可能会导致局域网中的其他计算机无法访问本机的共享文件！</Warning>
 			<Activate>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" Value="ForceGuest" Type="REG_DWORD" Data="1"/>
 			</Activate>
@@ -21786,6 +21980,7 @@
 	  <Item Type="CheckBox" Name="#启用不安全的来宾登录（by 闰月优葡）">
 		<Applicable>
 		  <OSVersion Compare=">=">10.0.10586</OSVersion>
+		  <QueryServiceStart Name="LanmanWorkstation"/>
 		</Applicable>
 		<System>
 		  <State>
@@ -21843,6 +22038,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#*禁止非管理员用户安装共享打印机的驱动程序（by 闰月优葡）">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\System32\spoolsv.exe"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21862,7 +22060,36 @@
 		</System>
 	  </Item>
 
+	  <Item Type="CheckBox" Name="#*禁用共享打印机的高级安全认证（by 闰月优葡）">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\System32\spoolsv.exe"/>
+		  <OSVersion Compare=">=">6.1</OSVersion>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print" Value="RpcAuthnLevelPrivacyEnabled" Type="REG_DWORD" Data="0"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print" Value="RpcAuthnLevelPrivacyEnabled" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Warning>#在Win10/11系统上禁用此选项可能会导致局域网中的其他计算机无法连接到本机的共享打印机！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print" Value="RpcAuthnLevelPrivacyEnabled" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+
 	  <Item Type="CheckBox" Name="#允许将未加密的密码发送到第三方SMB服务器（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanWorkstation"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21888,6 +22115,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#SMB服务器会话结束时自动断开客户端（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanServer"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21939,6 +22169,7 @@
 		<Applicable>
 		  <!--仅用于WinVista/7-->
 		  <OSVersion Compare="&lt;=">6.1</OSVersion>
+		  <QueryServiceStart Name="LanmanServer"/>
 		</Applicable>
 		<System>
 		  <State>
@@ -21964,6 +22195,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#作为客户端时启用SMB通信的数字签名（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanWorkstation"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -21988,6 +22222,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#作为客户端时始终要求SMB通信的数字签名（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanWorkstation"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -22013,6 +22250,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#作为服务器时启用SMB通信的数字签名（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanServer"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -22037,6 +22277,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#作为服务器时始终要求SMB通信的数字签名（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="LanmanServer"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -22062,6 +22305,9 @@
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#*禁用QoS保留带宽以加快网络传输（by 闰月优葡）">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\System32\drivers\pacer.sys"/>
+		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
@@ -22076,6 +22322,30 @@
 		  <False>
 			<Activate>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" Value="NonBestEffortLimit"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#*延长NetBIOS名称解析的超时时间‌（by 闰月优葡）">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\System32\drivers\netbt.sys"/>
+		  <QueryServiceStart Name="NetBT"/>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" Value="NameSrvQueryTimeout" Type="REG_DWORD" Compare=">=" Data="BB8"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" Value="NameSrvQueryTimeout" Type="REG_DWORD" Data="BB8"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" Value="NameSrvQueryTimeout" Type="REG_DWORD" Data="5DC"/>
 			</Activate>
 		  </False>
 		</System>
@@ -26516,73 +26786,6 @@
 			</Activate>
 		  </False>
 		</Default>
-	  </Item>
-
-	  <Item Type="CheckBox" Name="#禁用受保护的AudioDG进程（by 闰月优葡）">
-		<Applicable>
-		  <QueryServiceStart Name="Audiosrv"/>
-		  <FileExist FilePath="%SystemRoot%\System32\audiodg.exe"/>
-		  <OSVersion Compare="&lt;=">10.0.10586</OSVersion>
-		</Applicable>
-		<System>
-		  <State>
-			<Applicable>
-			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" Type="REG_DWORD" Data="1"/>
-			</Applicable>
-		  </State>
-		  <True>
-			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" Type="REG_DWORD" Data="1"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
-			</Activate>
-		  </True>
-		  <False>
-			<Warning>#启用受保护的AudioDG可能会导致某些声卡驱动出现兼容性问题！</Warning>
-			<Activate>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
-			</Activate>
-		  </False>
-		</System>
-	  </Item>
-
-	  <Item Type="CheckBox" Name="#启用受保护的AudioDG进程（by 闰月优葡）">
-		<Applicable>
-		  <QueryServiceStart Name="Audiosrv"/>
-		  <FileExist FilePath="%SystemRoot%\System32\audiodg.exe"/>
-		  <OSVersion Compare=">=">10.0.14393</OSVersion>
-		</Applicable>
-		<System>
-		  <State>
-			<Applicable>
-			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG"/>
-			  <Not>
-				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" Type="REG_DWORD" Data="0"/>
-			  </Not>
-			</Applicable>
-		  </State>
-		  <True>
-			<Warning>#启用受保护的AudioDG可能会导致某些声卡驱动出现兼容性问题！</Warning>
-			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG" Type="REG_DWORD" Data="1"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
-			</Activate>
-		  </True>
-		  <False>
-			<Activate>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
-			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
-			</Activate>
-		  </False>
-		</System>
 	  </Item>
 
 	  <Item Type="CheckBox" Name="#禁用组件堆栈（Component Based Servicing）日志">
