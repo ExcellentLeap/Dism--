@@ -55,7 +55,7 @@
 	  <Group>#过期文件</Group>
 	  <Scan Work="5">
 		<Applicable>
-		  <FileExist FilePath="%SystemDrive%\Windows.old"/>
+		  <FileExist FilePath="%SystemRoot%.old"/>
 		</Applicable>
 		<Activate>
 		  <General RootPath="%SystemDrive%" Flags="Directory">
@@ -107,19 +107,87 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#360浏览器老版本备份" Level="2">
-	  <!--2016年1月7日 11:39添加-->
+	<Item Name="#360浏览器老版本备份（by 闰月优葡）" Level="2">
 	  <Description>#360浏览器在升级到新版本后留下的备份文件，在故障时回滚到老版本。</Description>
 	  <Group>#过期文件</Group>
 	  <Scan>
 		<Applicable>
 		  <ImageFlags>1</ImageFlags>
-		  <FileExist FilePath="%APPDATA%\360se6\Application"/>
+		  <Or>
+			<RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe" Value="Path"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe" Value="Path"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe" Value="Path" Wow64="True"/>
+			<RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe" Value="Path"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe" Value="Path"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe" Value="Path" Wow64="True"/>
+			<RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe" Value="Path"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe" Value="Path"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe" Value="Path" Wow64="True"/>
+		  </Or>
 		</Applicable>
+		<Applicable_1>
+		  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe" Value="Path"/>
+		</Applicable_1>
+		<Applicable_2>
+		  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe" Value="Path"/>
+		</Applicable_2>
+		<Applicable_3>
+		  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe" Value="Path" Wow64="True"/>
+		</Applicable_3>
+		<Applicable_4>
+		  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe" Value="Path"/>
+		</Applicable_4>
+		<Applicable_5>
+		  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe" Value="Path"/>
+		</Applicable_5>
+		<Applicable_6>
+		  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe" Value="Path" Wow64="True"/>
+		</Applicable_6>
+		<Applicable_7>
+		  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe" Value="Path"/>
+		</Applicable_7>
+		<Applicable_8>
+		  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe" Value="Path"/>
+		</Applicable_8>
+		<Applicable_9>
+		  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe" Value="Path" Wow64="True"/>
+		</Applicable_9>
 		<Activate>
-		  <General RootPath="%APPDATA%\360se6\Application" Flags="Directory">
+		  <General RootPath="?GetRegSz(HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe,Path)" Flags="Directory" ID="Applicable_1">
 			<Query>*.*.*.*</Query>
 			<Excluded>?GetFileVersion(%Root%360se.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360se.exe,Path)" Flags="Directory" ID="Applicable_2">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360se.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\App Paths\360se.exe,Path)" Flags="Directory" ID="Applicable_3">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360se.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe,Path)" Flags="Directory" ID="Applicable_4">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360aibrowser.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe,Path)" Flags="Directory" ID="Applicable_5">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360aibrowser.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\App Paths\360aibrowser.exe,Path)" Flags="Directory" ID="Applicable_6">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360aibrowser.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe,Path)" Flags="Directory" ID="Applicable_7">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360ChromeX.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe,Path)" Flags="Directory" ID="Applicable_8">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360ChromeX.exe)</Excluded>
+		  </General>
+		  <General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\App Paths\360ChromeX.exe,Path)" Flags="Directory" ID="Applicable_9">
+			<Query>*.*.*.*</Query>
+			<Excluded>?GetFileVersion(%Root%360ChromeX.exe)</Excluded>
 		  </General>
 		</Activate>
 	  </Scan>
@@ -345,7 +413,7 @@
 		</Scan>
 		<Scan>
 		  <Activate>
-			<General RootPath="%System%\winevt\Logs"/>
+			<General RootPath="%SystemRoot%\System32\winevt\Logs"/>
 		  </Activate>
 		</Scan>
 	  </ScanCollection>
@@ -369,11 +437,11 @@
 
 	<Item Name="#Installer目录" Level="0">
 	  <Description>#清理被取代的msp补丁并减少Installer目录的大小。</Description>
-	  <Warning>#【这是一个实验性功能】清理后将无法卸载被取代的msp更新，如果有卸载更新需求请勿使用此选项！</Warning>
+	  <Warning>#【这是一个实验性功能】清理后将无法卸载被取代的msp更新，如果有卸载更新的需求请勿使用此选项！</Warning>
 	  <Group>#系统相关</Group>
 	  <Scan>
 		<Applicable>
-		  <FileExist FilePath="%SystemDrive%\Windows\Installer"/>
+		  <FileExist FilePath="%SystemRoot%\Installer"/>
 		</Applicable>
 		<Activate>
 		  <Custom ProcName="NCInstallerFolderCleanup"/>
@@ -427,7 +495,7 @@
 
 	<Item Name="#系统还原点" Level="2">
 	  <Description>#先删除全部还原点，如果系统还原已启用则会再创建一个新的还原点。</Description>
-	  <Warning>#清理后将无法使用之前创建的还原点，如果有使用之前的还原点的需求请勿使用此选项。</Warning>
+	  <Warning>#清理后将无法使用之前创建的还原点，如果有使用之前还原点的需求请勿使用此选项。</Warning>
 	  <Group>#系统相关</Group>
 	  <Scan Type="Custom">
 		<Applicable>
@@ -511,7 +579,7 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#Windows搜索索引缓存（by 闰月优葡）" Level="2">
+	<Item Name="#Windows搜索索引缓存（by 闰月优葡）" Level="3">
 	  <Description>#Windows的搜索索引服务为文件、电子邮件等编制的内容索引和属性缓存，随时间推移将占用大量磁盘空间，如不需要可以删除。</Description>
 	  <Group>#缓存文件</Group>
 	  <Scan>
@@ -600,7 +668,7 @@
 	</Item>
 
 	<Item Name="#XDE缓存文件" Level="2">
-	  <Description>#WP开发时保存的一些虚拟机状态文件，不建议频繁清理此条目。</Description>
+	  <Description>#WP开发时保存的一些虚拟机状态文件，不建议频繁清理此项。</Description>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
@@ -614,7 +682,7 @@
 	</Item>
 
 	<Item Name="#PDB缓存文件" Level="2">
-	  <Description>#调试程序时创建的符号缓存，不建议频繁清理此条目。</Description>
+	  <Description>#调试程序时创建的符号缓存。不建议频繁清理此项。</Description>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
@@ -630,7 +698,7 @@
 
 	<Item Name="#NET程序集缓存（by 大胖子技术员）" Level="2">
 	  <!--2016年1月6日 15:34添加-->
-	  <Description>#NET程序运行过程中产生的机器代码缓存文件，不建议频繁清理此条目。</Description>
+	  <Description>#NET程序运行过程中产生的机器代码缓存文件，不建议频繁清理此项。</Description>
 	  <Group>#缓存文件</Group>
 	  <Scan Work="5">
 		<Activate>
@@ -660,7 +728,7 @@
 
 	<Item Name="#Windows预读取文件（by 辰g.）" Level="2">
 	  <!--2016-01-27 15:18添加-->
-	  <Description>#用于加速下次程序启动速度，不建议频繁清理此条目。</Description>
+	  <Description>#用于加速下次程序启动速度，不建议频繁清理此项。</Description>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Activate>
@@ -669,7 +737,7 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#缩略图缓存" Level="2">
+	<Item Name="#缩略图缓存" Level="3">
 	  <Group>#缓存文件</Group>
 	  <ScanCollection>
 		<Scan Type="Custom">
@@ -686,9 +754,9 @@
 			<RegDelete Key="HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" Value="IconStreams" SkipError="2"/>
 			<RegDelete Key="HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" Value="PastIconsStream" SkipError="2"/>
 			<RegDelete Key="HKEY_CURRENT_USER\Software\Classes\Local Settings\MuiCache" SkipError="2"/>
-			<RegDelete Key="HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell" SkipError="2"/>
+			<RegDelete Key="HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" SkipError="2"/>
 			<RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Cached" SkipError="2"/>
-			<RegDelete Key="HKEY_LOCAL_MACHINE\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell" SkipError="2"/>
+			<RegDelete Key="HKEY_LOCAL_MACHINE\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" SkipError="2"/>
 			<ExplorerNotify Type="AssocChanged"/>
 		  </Activate>
 		</Scan>
@@ -699,11 +767,172 @@
 			  <Query>Microsoft\Windows\Explorer\*</Query>
 			  <Query>IconCache.db</Query>
 			</General>
-			<RegDelete Key="HKEY_LOCAL_MACHINE\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell" SkipError="2"/>
+			<RegDelete Key="HKEY_LOCAL_MACHINE\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" SkipError="2"/>
 		  </Activate>
 		</Scan>
 	  </ScanCollection>
 	</Item>
+
+	<Item Name="#Windows证书缓存（by 闰月优葡）" Level="3">
+	  <Group>#缓存文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Description>#当前用户的证书缓存。联网时定期清理此项有助于及时更新证书的信任状态和吊销状态。</Description>
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%userprofile%\AppData\LocalLow\Microsoft\CryptnetUrlCache"/>
+			<General RootPath="%userprofile%\AppData\LocalLow\Microsoft\CryptnetFlushCache"/>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Description>#所有用户的证书缓存。定期清理此项有助于及时更新证书的信任状态和吊销状态。</Description>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\LocalLow\Microsoft\CryptnetUrlCache"/>
+			<General RootPath="%SystemDrive%\Users\*\AppData\LocalLow\Microsoft\CryptnetFlushCache"/>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
+	<Item Name="#WPS Office缓存（by 闰月优葡）" Level="3">
+	  <Description>#WPS Office的缓存文件。建议定期删除以节省磁盘空间。</Description>
+	  <Group>#缓存文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%AppData%\kingsoft\office6\cache\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\kingsoft\office6" Flags="Directory">
+			  <Query>cache</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#WPS Office缓存（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\kingsoft\office6" Flags="Directory">
+			  <Query>cache</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
+	<Item Name="#Python pip缓存（by 闰月优葡）" Level="3">
+	  <Description>#使用Python的pip命令在线安装组件时所产生的缓存文件。</Description>
+	  <Group>#缓存文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%LocalAppData%\pip\cache\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%LocalAppData%\pip" Flags="Directory">
+			  <Query>cache</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#Python pip缓存（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Local\pip" Flags="Directory">
+			  <Query>cache</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
+	<Item Name="#2345看图王缓存（by 闰月优葡）" Level="3">
+	  <Description>#2345看图王所缓存的用户曾经打开的某些图片。建议定期删除。</Description>
+	  <Group>#缓存文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%AppData%\2345Pic\cache\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\2345Pic\">
+			  <Query>cache</Query>
+			  <Query>*.jpg</Query>
+			  <Query>*.bmp</Query>
+			  <Query>*.png</Query>
+			  <Query>*.gif</Query>
+			  <Query>share.*</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#2345看图王缓存（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\2345Pic\">
+			  <Query>cache</Query>
+			  <Query>*.jpg</Query>
+			  <Query>*.bmp</Query>
+			  <Query>*.png</Query>
+			  <Query>*.gif</Query>
+			  <Query>share.*</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
+	<Item Name="#2345PDF阅读器缓存（by 闰月优葡）" Level="2">
+	  <Description>#2345PDF阅读器所缓存的打开过的文档的历史记录。</Description>
+	  <Warning>#清理后将丢失所有已读PDF文档的历史记录和阅读位置，所有文档下次打开时全部从第一页开始阅读！</Warning>
+	  <Group>#缓存文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%AppData%\2345Pic\pdf\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\2345Pic\pdf\">
+			  <Excluded>2345pdf*.dat</Excluded>
+			  <Query>*</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#2345PDF阅读器缓存（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\2345Pic\pdf\">
+			  <Excluded>2345pdf*.dat</Excluded>
+			  <Query>*</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
 
 	<Item Name="#WinINet网页缓存" Level="3">
 	  <Description>#清理每个用户账户和应用容器下的Windows网络组件（例如IE、Edge）的网页缓存。仅支持默认目录。</Description>
@@ -720,10 +949,10 @@
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
 		  <General RootPath="%SystemRoot%\ServiceProfiles\*\AppData\Local\Microsoft\Windows\INetCache\"/>
 		  <General RootPath="%SystemRoot%\ServiceProfiles\*\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
-		  <General RootPath="%System%\config\systemprofile\AppData\Local\Microsoft\Windows\INetCache\"/>
-		  <General RootPath="%System%\config\systemprofile\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
-		  <General RootPath="%SystemDrive%\Windows\SysWOW64\config\systemprofile\AppData\Local\Microsoft\Windows\INetCache\"/>
-		  <General RootPath="%SystemDrive%\Windows\SysWOW64\config\systemprofile\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
+		  <General RootPath="%SystemRoot%\System32\config\systemprofile\AppData\Local\Microsoft\Windows\INetCache\"/>
+		  <General RootPath="%SystemRoot%\System32\config\systemprofile\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
+		  <General RootPath="%SystemRoot%\SysWOW64\config\systemprofile\AppData\Local\Microsoft\Windows\INetCache\"/>
+		  <General RootPath="%SystemRoot%\SysWOW64\config\systemprofile\AppData\Local\Microsoft\Windows\Temporary Internet Files\"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\INetCache\"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\#!*\INetCache\"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\MicrosoftEdge\Cache\"/>
@@ -747,10 +976,10 @@
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Roaming\Microsoft\Windows\Cookies\"/>
 		  <General RootPath="%SystemRoot%\ServiceProfiles\*\AppData\Local\Microsoft\Windows\INetCookies\"/>
 		  <General RootPath="%SystemRoot%\ServiceProfiles\*\AppData\Roaming\Microsoft\Windows\Cookies\"/>
-		  <General RootPath="%System%\config\systemprofile\AppData\Local\Microsoft\Windows\INetCookies\"/>
-		  <General RootPath="%System%\config\systemprofile\AppData\Roaming\Microsoft\Windows\Cookies\"/>
-		  <General RootPath="%SystemDrive%\Windows\SysWOW64\config\systemprofile\AppData\Local\Microsoft\Windows\INetCookies\"/>
-		  <General RootPath="%SystemDrive%\Windows\SysWOW64\config\systemprofile\AppData\Roaming\Microsoft\Windows\Cookies\"/>
+		  <General RootPath="%SystemRoot%\System32\config\systemprofile\AppData\Local\Microsoft\Windows\INetCookies\"/>
+		  <General RootPath="%SystemRoot%\System32\config\systemprofile\AppData\Roaming\Microsoft\Windows\Cookies\"/>
+		  <General RootPath="%SystemRoot%\SysWOW64\config\systemprofile\AppData\Local\Microsoft\Windows\INetCookies\"/>
+		  <General RootPath="%SystemRoot%\SysWOW64\config\systemprofile\AppData\Roaming\Microsoft\Windows\Cookies\"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\INetCookies\"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\#!*\INetCookies\"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\MicrosoftEdge\Cookies\"/>
@@ -829,6 +1058,37 @@
 	  </Scan>
 	</Item>
 
+	<Item Name="#QQGuild安装源缓存（by 闰月优葡）" Level="3">
+	  <Description>#腾讯QQGuild的安装包。这个一般很少用到，可以放心删除。</Description>
+	  <Group>#应用程序</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%LocalAppData%\qq-chat-updater\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%LocalAppData%" Flags="Directory">
+			  <Query>qq-chat-updater</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#QQGuild安装源缓存（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Local" Flags="Directory">
+			  <Query>qq-chat-updater</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
 	<!--备份文件-->
 
 	<Item Name="#引导备份信息" Level="3">
@@ -849,7 +1109,7 @@
 	<Item Name="#会声会影素材存档" Level="2">
 	  <!--2016年1月8日 16:33添加-->
 	  <Description>#会声会影使用过程中会在此目录产生存档，如不需要可以删除。</Description>
-	  <Warning>#请确保所有编辑的视频已经保存！</Warning>
+	  <Warning>#请确保所有编辑的视频都已保存！</Warning>
 	  <Group>#备份文件</Group>
 	  <Scan>
 		<Applicable>
@@ -860,6 +1120,37 @@
 		  <General RootPath="%Documents%\Corel VideoStudio Pro\*\SmartProxy"/>
 		</Activate>
 	  </Scan>
+	</Item>
+
+	<Item Name="#WPS Office备份文件（by 闰月优葡）" Level="3">
+	  <Description>#WPS Office备份的一些用户打开过的文档。如不需要可以删除。</Description>
+	  <Group>#备份文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%AppData%\kingsoft\office6\backup\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\kingsoft\office6" Flags="Directory">
+			  <Query>backup</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#WPS Office备份文件（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\kingsoft\office6" Flags="Directory">
+			  <Query>backup</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
 	</Item>
 
 	<Item Name="#最后一次正确配置（by Stanlazy）" Level="2">
@@ -880,6 +1171,69 @@
 		  </General>
 		</Activate>
 	  </Scan>
+	</Item>
+
+
+	<Item Name="#2345看图王安装目录备份（by 闰月优葡）" Level="3">
+	  <Description>#2345看图王的程序目录在用户AppData文件夹下的备份，可以放心删除。</Description>
+	  <Group>#备份文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%AppData%\2345Pic\Application\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\2345Pic" Flags="Directory">
+			  <Query>Application</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#2345看图王安装目录备份（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\2345Pic" Flags="Directory">
+			  <Query>Application</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
+	<Item Name="#2345好压安装目录备份（by 闰月优葡）" Level="3">
+	  <Description>#2345好压的程序目录在用户AppData文件夹下的备份，可以放心删除。</Description>
+	  <Group>#备份文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<FileExist FilePath="%AppData%\HaoZip\Application\"/>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\HaoZip" Flags="Directory">
+			  <Query>Application</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#2345好压安装目录备份（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\HaoZip" Flags="Directory">
+			  <Query>Application</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
 	</Item>
 
 	<!--临时文件-->
@@ -934,8 +1288,8 @@
 		  <General RootPath="%SystemDrive%\Logs\"/>
 		  <General RootPath="%SystemRoot%\Logs\"/>
 		  <General RootPath="%ProgramData%\USOShared\Logs"/>
-		  <General RootPath="%System%\WDI\LogFiles\*"/>
-		  <General RootPath="%System%\LogFiles\*"/>
+		  <General RootPath="%SystemRoot%\System32\WDI\LogFiles\*"/>
+		  <General RootPath="%SystemRoot%\System32\LogFiles\*"/>
 		  <General RootPath="%SystemRoot%\debug"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\Microsoft\CLR_*\*.log"/>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\#!*\Microsoft\CLR_*\*.log"/>
@@ -945,7 +1299,7 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#Windows日常临时文件" Level="2">
+	<Item Name="#Windows日常临时文件" Level="3">
 	  <Description>#一些程序为特定用户产生的临时文件。</Description>
 	  <Group>#临时文件</Group>
 	  <ScanCollection>
@@ -956,10 +1310,10 @@
 		  <Activate>
 			<General RootPath="?GetRegSz(HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment,TEMP)"/>
 			<General RootPath="%Temp%"/>
-			<!--
-			  <General RootPath="%SystemDrive%\Windows\ServiceProfiles\NetworkService\AppData\Local\Temp"/>
-			  <General RootPath="%SystemDrive%\Windows\ServiceProfiles\LocalService\AppData\Local\Temp"/>
-			-->
+
+			<General RootPath="%SystemRoot%\ServiceProfiles\NetworkService\AppData\Local\Temp"/>
+			<General RootPath="%SystemRoot%\ServiceProfiles\LocalService\AppData\Local\Temp"/>
+
 			<General RootPath="*\">
 			  <Query>Found.*</Query>
 			</General>
@@ -968,25 +1322,24 @@
 			<General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\#!*\Temp\"/>
 
 			<General RootPath="%SystemRoot%\ServiceProfiles\*\AppData\Local\Temp\"/>
-			<General RootPath="%System%\config\systemprofile\AppData\Local\Temp\"/>
-			<General RootPath="%SystemDrive%\Windows\SysWOW64\config\systemprofile\AppData\Local\Temp\"/>
+			<General RootPath="%SystemRoot%\System32\config\systemprofile\AppData\Local\Temp\"/>
+			<General RootPath="%SystemRoot%\SysWOW64\config\systemprofile\AppData\Local\Temp\"/>
 		  </Activate>
 		</Scan>
 		<Scan>
 		  <Activate>
 			<General RootPath="%SystemDrive%\Users\*\AppData\Local\Temp\"/>
 			<General RootPath="%SystemRoot%\Temp\"/>
-			<!--
-			<General RootPath="%SystemDrive%\Windows\ServiceProfiles\NetworkService\AppData\Local\Temp"/>
-			<General RootPath="%SystemDrive%\Windows\ServiceProfiles\LocalService\AppData\Local\Temp"/>
-			-->
+
+			<General RootPath="%SystemRoot%\ServiceProfiles\NetworkService\AppData\Local\Temp"/>
+			<General RootPath="%SystemRoot%\ServiceProfiles\LocalService\AppData\Local\Temp"/>
 
 			<General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\Temp\"/>
 			<General RootPath="%SystemDrive%\Users\*\AppData\Local\Packages\*\AC\#!*\Temp\"/>
 
 			<General RootPath="%SystemRoot%\ServiceProfiles\*\AppData\Local\Temp\"/>
-			<General RootPath="%System%\config\systemprofile\AppData\Local\Temp\"/>
-			<General RootPath="%SystemDrive%\Windows\SysWOW64\config\systemprofile\AppData\Local\Temp\"/>
+			<General RootPath="%SystemRoot%\System32\config\systemprofile\AppData\Local\Temp\"/>
+			<General RootPath="%SystemRoot%\SysWOW64\config\systemprofile\AppData\Local\Temp\"/>
 		  </Activate>
 		</Scan>
 	  </ScanCollection>
@@ -1015,7 +1368,7 @@
 	</Item>
 
 	<Item Name="#Windows临时安装文件" Level="2">
-	  <Description>#在系统升级或者还原后留下的系统临时安装文件，如果你确定当前没有进行系统升级或者还原，那么可以安全删除。</Description>
+	  <Description>#在系统升级或者还原后留下的系统临时安装文件，如果你确定当前没有进行系统升级或者还原，则可以安全删除。</Description>
 	  <Group>#临时文件</Group>
 	  <Scan Work="3">
 		<Applicable>
@@ -1035,8 +1388,8 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#QQ临时数据" Level="2">
-	  <Description>#QQ运行时产生的临时文件还有日志，不影响QQ消息记录，建议定期删除。</Description>
+	<Item Name="#QQ临时数据" Level="3">
+	  <Description>#QQ运行时产生的临时文件和日志，不影响QQ消息记录，建议定期删除。</Description>
 	  <Group>#临时文件</Group>
 	  <Scan>
 		<Applicable>
@@ -1052,6 +1405,7 @@
 			<Query>Logs</Query>
 			<Query>TXSSO\SetupLogs</Query>
 			<Query>TXSSO\SSOTemp</Query>
+			<Query>QQ\Temp</Query>
 		  </General>
 		  <General RootPath="%SystemDrive%\Users\*\AppData\Roaming\Tencent\Users\*\WinTemp\*"/>
 		  <General RootPath="%SystemX86%\config\systemprofile\AppData\Roaming\Tencent" Flags="Directory"/>
@@ -1059,7 +1413,31 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#YY临时文件" Level="2">
+	<Item Name="#微信临时数据（by 闰月优葡）" Level="3">
+	  <Description>#微信运行时产生的临时文件和日志，不影响微信消息记录，建议定期删除。</Description>
+	  <Group>#临时文件</Group>
+	  <Scan>
+		<Applicable>
+		  <Or>
+			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WeChat"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WeChat" Wow64="True"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WeiXin"/>
+			<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WeiXin" Wow64="True"/>
+		  </Or>
+		</Applicable>
+		<Activate>
+		  <General RootPath="%SystemDrive%\Users\*\AppData\Roaming\Tencent\" Flags="Directory">
+			<Query>WeChat\log</Query>
+			<Query>WeChat\radium\WmpfCache</Query>
+			<Query>WeiXin\log</Query>
+			<Query>WeiXin\radium\WmpfCache</Query>
+		  </General>
+		</Activate>
+	  </Scan>
+	</Item>
+
+
+	<Item Name="#YY临时文件" Level="3">
 	  <Description>#YY运行时产生的一些临时文件以及日志，建议定期删除。</Description>
 	  <Group>#临时文件</Group>
 	  <Scan>
@@ -1108,18 +1486,41 @@
 	<Item Name="#百度网盘日志" Level="3">
 	  <Description>#百度网盘运行时产生的一些日志文件。</Description>
 	  <Group>#临时文件</Group>
-	  <Scan>
-		<Applicable>
-		  <Or>
-			<FileExist FilePath="%APPDATA%\BaiduYunKernel\Data"/>
-			<FileExist FilePath="%APPDATA%\BaiduYunGuanjia\logs"/>
-		  </Or>
-		</Applicable>
-		<Activate>
-		  <General RootPath="%APPDATA%\BaiduYunKernel\Data\"/>
-		  <General RootPath="%APPDATA%\BaiduYunGuanjia\logs\"/>
-		</Activate>
-	  </Scan>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<Or>
+			  <FileExist FilePath="%APPDATA%\BaiduYunKernel\Data\"/>
+			  <FileExist FilePath="%APPDATA%\BaiduYunGuanjia\logs\"/>
+			</Or>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%APPDATA%\BaiduYunKernel" Flags="Directory">
+			  <Query>Data</Query>
+			</General>
+			<General RootPath="%APPDATA%\BaiduYunGuanjia" Flags="Directory">
+			  <Query>logs</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#百度网盘日志（所有用户）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\BaiduYunKernel" Flags="Directory">
+			  <Query>Data</Query>
+			</General>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\BaiduYunGuanjia" Flags="Directory">
+			  <Query>logs</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
 	</Item>
 
 	<Item Name="#飞信日志" Level="3">
@@ -1135,6 +1536,61 @@
 	  </Scan>
 	</Item>
 
+	<Item Name="#Snapshot日志（by 闰月优葡）" Level="3">
+	  <Description>#Drive Snapshot运行时产生的一些日志文件。</Description>
+	  <Group>#临时文件</Group>
+	  <Scan>
+		<Applicable>
+		  <FileExist FilePath="%LocalAppData%\Snapshot\"/>
+		</Applicable>
+		<Activate>
+		  <General RootPath="%LocalAppData%\Snapshot\">
+			<Query>*.log</Query>
+		  </General>
+		</Activate>
+	  </Scan>
+	</Item>
+
+	<Item Name="#企业微信日志（by 闰月优葡）" Level="3">
+	  <Description>#企业微信运行时产生的一些日志文件。</Description>
+	  <Group>#临时文件</Group>
+	  <ScanCollection>
+		<Scan Type="Custom">
+		  <Applicable>
+			<ImageFlags>1</ImageFlags>
+			<Or>
+			  <FileExist FilePath="%AppData%\WXDrive\logs\"/>
+			  <FileExist FilePath="%AppData%\Tencent\WXWork\Log\"/>
+			</Or>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%AppData%\WXDrive" Flags="Directory">
+			  <Query>logs</Query>
+			</General>
+			<General RootPath="%AppData%\Tencent\WXWork" Flags="Directory">
+			  <Query>Log</Query>
+			</General>
+		  </Activate>
+		</Scan>
+		<Scan>
+		  <Name>#企业微信日志（所有用户）（by 闰月优葡）</Name>
+		  <Applicable>
+			<Not>
+			  <ImageFlags>1</ImageFlags>
+			</Not>
+		  </Applicable>
+		  <Activate>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\WXDrive" Flags="Directory">
+			  <Query>logs</Query>
+			</General>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\Tencent\WXWork" Flags="Directory">
+			  <Query>Log</Query>
+			</General>
+		  </Activate>
+		</Scan>
+	  </ScanCollection>
+	</Item>
+
 	<Item Name="#回收站" Level="3">
 	  <Description>#用于存放用户手动删除的文件目录。</Description>
 	  <Group>#临时文件</Group>
@@ -1148,7 +1604,7 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#系统以及程序崩溃dmp文件（by YukiSakura）" Level="1">
+	<Item Name="#系统以及程序崩溃dmp文件（by YukiSakura）" Level="3">
 	  <!--2016-01-22 16:00添加-->
 	  <Description>#当系统蓝屏或者应用程序崩溃时产生的dmp文件。</Description>
 	  <Group>#临时文件</Group>
@@ -1188,8 +1644,8 @@
 	  </ScanCollection>
 	</Item>
 
-	<Item Name="#Visual Studio日志" Level="2">
-	  <Description>#使用Visual Studio所产生的日志。</Description>
+	<Item Name="#Visual Studio日志" Level="3">
+	  <Description>#使用Visual Studio时产生的日志。</Description>
 	  <Group>#临时文件</Group>
 	  <ScanCollection>
 		<Scan>
@@ -1238,7 +1694,7 @@
 			<And>
 			  <!--Win8.1以上平台必须存在Wof.sys文件不然无法生效-->
 			  <OSVersion Compare=">=">6.3</OSVersion>
-			  <FileExist FilePath="%System%\drivers\wof.sys"/>
+			  <FileExist FilePath="%SystemRoot%\System32\drivers\wof.sys"/>
 			</And>
 		  </Or>
 		</Applicable>
@@ -1248,7 +1704,7 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#过期驱动" Level="0">
+	<Item Name="#过期驱动" Level="2">
 	  <Description>#删除计算机中不使用的驱动程序以节省驱动存储池空间。</Description>
 	  <Warning>#该功能对于某些精简系统或者手动处理过驱动的系统可能发生驱动签名问题。</Warning>
 	  <Group>#过期文件</Group>
@@ -1276,7 +1732,7 @@
 
 	<Item Name="#Installer基线缓存" Level="0">
 	  <Description>#使用Installer技术的安装程序产生的缓存。</Description>
-	  <Warning>#可能导致卸载Office、VM等应用程序需要安装包。</Warning>
+	  <Warning>#清理此项可能导致卸载Office、VM等应用程序时需要安装包。</Warning>
 	  <Group>#系统相关</Group>
 	  <Scan Work="5">
 		<Applicable>
@@ -1291,7 +1747,7 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#Office安装源" Level="0">
+	<Item Name="#Office安装源" Level="2">
 	  <Description>#安装Office后产生的安装源，如果不需要卸载Office可以考虑删除，删除后能正常安装Office更新。</Description>
 	  <Warning>#清理后将无法卸载只能升级安装或者强行删除，Office 2007以下版本（包含）删除后还影响安装更新。</Warning>
 	  <Group>#应用程序</Group>
@@ -1313,7 +1769,7 @@
 			<FileExist FilePath="%SystemDrive%\MSOCache"/>
 		  </Applicable>
 		  <Activate>
-			<General RootPath="%SystemDrive%\" Flags="Directory">
+			<General RootPath="%SystemDrive%" Flags="Directory">
 			  <Query>MSOCache</Query>
 			</General>
 		  </Activate>
@@ -1354,14 +1810,17 @@
 	  </Scan>
 	</Item>
 
-	<Item Name="#瑞昱声卡驱动安装源缓存（by YukiSakura）" Level="0">
+	<Item Name="#瑞昱声卡驱动安装源缓存（by YukiSakura &amp; 闰月优葡）" Level="2">
 	  <!--2016-01-27 10:10添加-->
 	  <Description>#瑞昱声卡安装后留下的安装源缓存。</Description>
-	  <Warning>#此条目可能影响瑞昱声卡驱动的卸载。</Warning>
+	  <Warning>#此项可能影响瑞昱声卡驱动的卸载。</Warning>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
-		  <FileExist FilePath="%SystemDrive%\Program Files\Realtek\Audio"/>
+		  <Or>
+			<FileExist FilePath="%SystemDrive%\Program Files\Realtek\Audio\"/>
+			<FileExist FilePath="%SystemRoot%\System32\drivers\rtkhdasetting.zip"/>
+		  </Or>
 		</Applicable>
 		<Activate>
 		  <General RootPath="%SystemDrive%\Program Files\Realtek\Audio" Flags="Directory">
@@ -1369,6 +1828,7 @@
 			<Excluded>HDA</Excluded>
 			<Excluded>ASIO</Excluded>
 		  </General>
+		  <General RootPath="%SystemRoot%\System32\drivers\rtkhdasetting.zip"/>
 		</Activate>
 	  </Scan>
 	</Item>
@@ -1376,7 +1836,7 @@
 	<Item Name="#Java安装源缓存（by YukiSakura）" Level="0">
 	  <!--2016-01-27 10:10添加-->
 	  <Description>#Java安装后留下的安装源缓存。</Description>
-	  <Warning>#此条目可能影响Java的卸载。</Warning>
+	  <Warning>#此项可能影响Java的卸载。</Warning>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
@@ -1395,7 +1855,7 @@
 	<Item Name="#英特尔驱动安装源缓存（by YukiSakura）" Level="0">
 	  <!--2016-01-27 15:18添加-->
 	  <Description>#英特尔驱动安装后留下的安装源缓存。</Description>
-	  <Warning>#此条目可能影响英特尔驱动的卸载。</Warning>
+	  <Warning>#此项可能影响英特尔驱动的卸载。</Warning>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
@@ -1410,7 +1870,7 @@
 	<Item Name="#英伟达驱动安装源缓存（by YukiSakura）" Level="0">
 	  <!--2016-01-27 15:18添加-->
 	  <Description>#英伟达驱动安装后留下的安装源缓存。</Description>
-	  <Warning>#此条目可能影响英伟达驱动的卸载。</Warning>
+	  <Warning>#此项可能影响英伟达驱动的卸载。</Warning>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
@@ -1426,7 +1886,7 @@
 	<Item Name="#英伟达驱动安装包（by Ailick）" Level="1">
 	  <!--2017-01-12 18:01添加-->
 	  <Description>#NVIDIA Geforce Experience更新程序时产生的安装包。</Description>
-	  <Warning>#此条目可能影响英伟达驱动的卸载。</Warning>
+	  <Warning>#此项可能影响英伟达驱动的卸载。</Warning>
 	  <Group>#临时文件</Group>
 	  <Scan>
 		<Applicable>
@@ -1441,7 +1901,7 @@
 	<Item Name="#Microsoft SQL Server更新缓存（by Honry &amp; 撕裂五维空间）" Level="0">
 	  <!--2016-02-29 14:30添加-->
 	  <Description>#安装Microsoft SQL Server补丁残留的安装缓存。</Description>
-	  <Warning>#此条目最新添加，可能引发意外问题！</Warning>
+	  <Warning>#此项最新添加，可能引发意外问题！</Warning>
 	  <Group>#缓存文件</Group>
 	  <ScanCollection>
 		<Scan>
@@ -1486,24 +1946,28 @@
 	  </ScanCollection>
 	</Item>
 
-	<Item Name="#Adobe Acrobat安装源缓存（by Honry）" Level="0">
+	<Item Name="#Adobe Acrobat安装源缓存（by Honry &amp; 闰月优葡）" Level="0">
 	  <!--2016-02-29 14:40添加-->
 	  <Description>#安装Adobe Acrobat后留下的安装缓存。</Description>
-	  <Warning>#删除此条目可能导致Adobe Acrobat无法正常卸载！</Warning>
+	  <Warning>#清理此项可能导致Adobe Acrobat无法正常卸载！</Warning>
 	  <Group>#缓存文件</Group>
 	  <Scan>
 		<Applicable>
-		  <FileExist FilePath="%SystemDrive%\Program Files (x86)\Adobe\Acrobat DC\Setup Files"/>
+		  <Or>
+			<FileExist FilePath="%SystemDrive%\Program Files (x86)\Adobe\Acrobat DC\Setup Files\"/>
+			<FileExist FilePath="%SystemDrive%\Program Files\Adobe\Acrobat DC\Setup Files\"/>
+		  </Or>
 		</Applicable>
 		<Activate>
 		  <General RootPath="%SystemDrive%\Program Files (x86)\Adobe\Acrobat DC\Setup Files"/>
+		  <General RootPath="%SystemDrive%\Program Files\Adobe\Acrobat DC\Setup Files"/>
 		</Activate>
 	  </Scan>
 	</Item>
 
-	<Item Name="#小红伞临时文件" Level="0">
+	<Item Name="#小红伞临时文件" Level="2">
 	  <!--2016-04-03 20:16添加-->
-	  <Description>#小红伞杀毒软件在自动升级过程中残留的临时文件。</Description>
+	  <Description>#小红伞（Avira）杀毒软件在自动升级过程中残留的临时文件。</Description>
 	  <Group>#临时文件</Group>
 	  <Scan>
 		<Applicable>
@@ -1521,7 +1985,7 @@
 	<Item Name="#Microsoft .NET安装缓存（by 撕裂五维空间）" Level="0">
 	  <!--2016-04-11 18:01添加-->
 	  <Description>#安装Microsoft .NET补丁时残留的安装缓存。</Description>
-	  <Warning>#此条目最新添加，可能引发意外问题！</Warning>
+	  <Warning>#此项最新添加，可能引发意外问题！</Warning>
 	  <Group>#缓存文件</Group>
 	  <ScanCollection>
 		<Scan>
@@ -4666,30 +5130,34 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#显示首次登录动画（by intionwun &amp; 组策略编辑器）">
+	  <Item Type="CheckBox" Name="#不要显示首次登录动画（by 闰月优葡 &amp; 组策略编辑器）">
 		<Applicable>
 		  <OSVersion Compare=">=">6.2</OSVersion>
-		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		</Applicable>
 		<System>
 		  <State>
 			<Applicable>
 			  <Or>
-				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="1"/>
-				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="1"/>
+				<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="0"/>
+				<And>
+				  <Not>
+					<RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation"/>
+				  </Not>
+				  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="0"/>
+				</And>
 			  </Or>
 			</Applicable>
 		  </State>
 		  <True>
 			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="1"/>
-			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation" SkipError="2"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="0"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="0"/>
 			</Activate>
 		  </True>
 		  <False>
 			<Activate>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="0"/>
-			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="0"/>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" Value="EnableFirstLogonAnimation" Type="REG_DWORD" Data="1"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" Value="EnableFirstLogonAnimation" SkipError="2"/>
 			</Activate>
 		  </False>
 		</System>
@@ -7731,6 +8199,33 @@
 			<Activate>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableProtectedAudioDG"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="DisableProtectedAudioDG" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#允许播放来自音频输入端口的声音">
+		<Applicable>
+		  <OSVersion Compare=">=">6.1</OSVersion>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableCaptureMonitor" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableCaptureMonitor" Type="REG_DWORD" Data="1"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio" Value="EnableCaptureMonitor" Type="REG_DWORD" Data="0"/>
 			  <ExplorerNotify Type="Cmd" Cmd="net stop Audiosrv" SkipError="2"/>
 			  <ExplorerNotify Type="Cmd" Cmd="net start Audiosrv" SkipError="2"/>
 			</Activate>
@@ -20867,7 +21362,7 @@
 
 	  <Item Type="CheckBox" Name="#*隐藏Win10升级助手GWX">
 		<Applicable>
-		  <FileExist FilePath="%SystemDrive%\Windows\System32\GWX"/>
+		  <FileExist FilePath="%SystemRoot%\System32\GWX"/>
 		</Applicable>
 		<System>
 		  <State>
@@ -22870,6 +23365,54 @@
 			<Activate>
 			  <SetServiceStart Name="UCPD" Type="2"/>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\UCPDMgr.exe" Value="Debugger" Type="REG_SZ"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁用2345好压广告与推广服务（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="HaoZipSvc"/>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <QueryServiceStart Name="HaoZipSvc" Type="4"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <SetServiceStart Name="HaoZipSvc" Type="4"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop HaoZipSvc" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <SetServiceStart Name="HaoZipSvc" Type="3"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁用2345看图王广告与推广服务（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="ViewPic_2345Svc"/>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <QueryServiceStart Name="ViewPic_2345Svc" Type="4"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <SetServiceStart Name="ViewPic_2345Svc" Type="4"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop ViewPic_2345Svc" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <SetServiceStart Name="ViewPic_2345Svc" Type="3"/>
 			</Activate>
 		  </False>
 		</System>
