@@ -1596,9 +1596,12 @@
 	  <Group>#临时文件</Group>
 	  <Scan>
 		<Activate>
-		  <General RootPath="%SystemDrive%">
+		  <General RootPath="%SystemDrive%\$RECYCLE.BIN">
 			<Query>*</Query>
 			<Excluded>S-1-5-18</Excluded>
+		  </General>
+		  <General RootPath="%SystemDrive%" Flags="Directory">
+			<Query>RECYCLER</Query>
 		  </General>
 		</Activate>
 	  </Scan>
