@@ -1591,15 +1591,15 @@
 	  </ScanCollection>
 	</Item>
 
-	<Item Name="#回收站" Level="3">
-	  <Description>#用于存放用户手动删除的文件目录。</Description>
+	<Item Name="#回收站（仅系统盘）" Level="2">
+	  <Description>#Windows系统分区上用于存放用户手动删除文件的目录。</Description>
 	  <Group>#临时文件</Group>
 	  <Scan>
-		<Applicable>
-		  <ImageFlags>1</ImageFlags>
-		</Applicable>
 		<Activate>
-		  <General RootPath="%SystemDrive%\$Recycle.Bin"/>
+		  <General RootPath="%SystemDrive%">
+			<Query>*</Query>
+			<Excluded>S-1-5-18</Excluded>
+		  </General>
 		</Activate>
 	  </Scan>
 	</Item>
@@ -1788,6 +1788,7 @@
 		</Applicable>
 		<Activate>
 		  <General RootPath="%ProgramData%\Microsoft\ClickToRun\">
+			<Query>*</Query>
 			<Excluded>MachineData</Excluded>
 			<Excluded>UserData</Excluded>
 		  </General>
