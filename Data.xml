@@ -797,17 +797,31 @@
 	</Item>
 
 	<Item Name="#WPS Office缓存（by 闰月优葡）" Level="3">
-	  <Description>#WPS Office的缓存文件。建议定期删除以节省磁盘空间。</Description>
+	  <Description>#WPS Office的缓存和日志文件。建议定期删除以节省磁盘空间。</Description>
 	  <Group>#缓存文件</Group>
 	  <ScanCollection>
 		<Scan Type="Custom">
 		  <Applicable>
 			<ImageFlags>1</ImageFlags>
-			<FileExist FilePath="%AppData%\kingsoft\office6\cache\"/>
+			<Or>
+			  <FileExist FilePath="%AppData%\kingsoft\office6\cache\"/>
+			  <FileExist FilePath="%AppData%\kingsoft\office6\log\"/>
+			  <FileExist FilePath="%AppData%\kingsoft\office6\OfficeSpace\log\"/>
+			  <FileExist FilePath="%AppData%\kingsoft\office6\update\log\"/>
+			  <FileExist FilePath="%AppData%\kingsoft\office6\update\dump\"/>
+			</Or>
 		  </Applicable>
 		  <Activate>
 			<General RootPath="%AppData%\kingsoft\office6" Flags="Directory">
 			  <Query>cache</Query>
+			  <Query>log</Query>
+			</General>
+			<General RootPath="%AppData%\kingsoft\office6\update" Flags="Directory">
+			  <Query>dump</Query>
+			  <Query>log</Query>
+			</General>
+			<General RootPath="%AppData%\kingsoft\office6\OfficeSpace" Flags="Directory">
+			  <Query>log</Query>
 			</General>
 		  </Activate>
 		</Scan>
@@ -821,6 +835,14 @@
 		  <Activate>
 			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\kingsoft\office6" Flags="Directory">
 			  <Query>cache</Query>
+			  <Query>log</Query>
+			</General>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\kingsoft\office6\update" Flags="Directory">
+			  <Query>dump</Query>
+			  <Query>log</Query>
+			</General>
+			<General RootPath="%SystemDrive%\Users\*\AppData\Roaming\kingsoft\office6\OfficeSpace" Flags="Directory">
+			  <Query>log</Query>
 			</General>
 		  </Activate>
 		</Scan>
@@ -12029,12 +12051,10 @@
 	</Group>
 
 	<Group Name="#旧系统复古体验">
-	  <Applicable>
-		<FileExist FilePath="%SystemRoot%\Explorer.exe"/>
-		<FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
-	  </Applicable>
 	  <Item Type="CheckBox" Name="#将桌面右键菜单“显示设置”调整为Win7样式（by 大胖子技术员）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion>10.0</OSVersion>
 		  <OSVersion Compare="&lt;=">10.0.10586</OSVersion>
 		  <Or>
@@ -12067,6 +12087,8 @@
 
 	  <Item Type="CheckBox" Name="#将桌面右键菜单“个性化”调整为Win7样式（by 大胖子技术员）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion>10.0</OSVersion>
 		  <OSVersion Compare="&lt;=">10.0.14393</OSVersion>
 		  <Or>
@@ -12097,6 +12119,8 @@
 
 	  <Item Type="CheckBox" Name="#将任务栏“音量调节”调整为Win7样式（by 溯汐潮）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion>10.0</OSVersion>
 		  <OSVersion Compare="&lt;">10.0.22000</OSVersion>
 		</Applicable>
@@ -12121,6 +12145,8 @@
 
 	  <Item Type="CheckBox" Name="#将任务栏“电源指示器”调整为Win7样式（by 闰月优葡）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion Compare=">=">6.4</OSVersion>
 		  <OSVersion Compare="&lt;">10.0.22000</OSVersion>
 		</Applicable>
@@ -12145,6 +12171,8 @@
 
 	  <Item Type="CheckBox" Name="#将任务栏“时间和日期”调整为Win7样式（by 闰月优葡）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion>10.0</OSVersion>
 		  <OSVersion Compare="&lt;">10.0.22000</OSVersion>
 		</Applicable>
@@ -12170,6 +12198,8 @@
 
 	  <Item Type="CheckBox" Name="#将任务栏“网络指示器”调整为Win8.1样式（by 闰月优葡）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion>10.0</OSVersion>
 		  <OSVersion Compare="&lt;">10.0.26100</OSVersion>
 		</Applicable>
@@ -12195,6 +12225,8 @@
 
 	  <Item Type="CheckBox" Name="#将“系统通知”调整为Win7样式（任务栏气球通知）（by 闰月优葡）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion Compare=">=">6.4</OSVersion>
 		  <OSVersion Compare="&lt;">10.0.22621</OSVersion>
 		</Applicable>
@@ -12254,6 +12286,8 @@
 	  <Item Type="CheckBox" Name="#将Alt+Tab“多任务切换”调整为XP模式（by 闰月优葡 &amp; registryexpert）">
 		<Applicable>
 		  <OSVersion Compare="&lt;">10.0.26100</OSVersion>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		</Applicable>
 		<Current>
 		  <State>
@@ -12293,6 +12327,8 @@
 
 	  <Item Type="CheckBox" Name="#将“右键菜单”调整为Win7样式（by Silence）">
 		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		  <OSVersion Compare=">=">10.0.10586</OSVersion>
 		  <OSVersion Compare="&lt;=">10.0.17134</OSVersion>
 		</Applicable>
@@ -12319,6 +12355,8 @@
 		<Applicable>
 		  <OSVersion>10.0.19041</OSVersion>
 		  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EditionVersion" Value="EditionBuildNumber" Type="REG_DWORD" Compare=">=" Data="4A62"/>
+		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
+		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		</Applicable>
 		<System>
 		  <State>
@@ -12336,6 +12374,29 @@
 		  <False>
 			<Activate>
 			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\0\2093230218" Value="EnabledState" Type="REG_DWORD" Data="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#*将“开机转圈动画”调整为Win10样式（by 闰月优葡）">
+		<Applicable>
+		  <OSVersion Compare=">=">10.0.22621</OSVersion>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BootControl" Value="BootProgressAnimation" Type="REG_DWORD" Data="0"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BootControl" Value="BootProgressAnimation" Type="REG_DWORD" Data="0"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BootControl" Value="BootProgressAnimation"/>
 			</Activate>
 		  </False>
 		</System>
