@@ -2901,6 +2901,48 @@
 		</Default>
 	  </Item>
 
+	  <Item Type="CheckBox" Name="#在任务栏中显示电池剩余电量（by 726b2d54）">
+		<Applicable>
+		  <FileVersion FilePath="%SystemRoot%\System32\SettingsHandlers_OneCore_BatterySaver.dll" Compare=">=">10.0.26100.3037</FileVersion>
+		</Applicable>
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="IsBatteryPercentageEnabled" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项在某些版本的Win11系统上可能需要搭配StartAllBack才能起效。</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="IsBatteryPercentageEnabled" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate Restart="Explorer">
+			  <RegDelete Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="IsBatteryPercentageEnabled"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="IsBatteryPercentageEnabled" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项在某些版本的Win11系统上可能需要搭配StartAllBack才能起效。</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="IsBatteryPercentageEnabled" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="IsBatteryPercentageEnabled"/>
+			</Activate>
+		  </False>
+		</Default>
+	  </Item>
+
 	  <Item Type="CheckBox" Name="#光标悬停在任务栏尾部时预览桌面（by 闰月优葡）">
 		<Applicable>
 		  <OSVersion Compare=">=">6.1</OSVersion>
@@ -4129,6 +4171,7 @@
 			<Warning>#此选项将在重新登录当前用户后生效。</Warning>
 			<Activate>
 			  <RegWrite Key="HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics" Value="MinAnimate" Type="REG_SZ" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" Value="VisualFXSetting" Type="REG_DWORD" Data="3"/>
 			</Activate>
 		  </False>
 		</Current>
@@ -4146,6 +4189,7 @@
 		  <False>
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\DEFAULT\Control Panel\Desktop\WindowMetrics" Value="MinAnimate" Type="REG_SZ" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" Value="VisualFXSetting" Type="REG_DWORD" Data="3"/>
 			</Activate>
 		  </False>
 		</Default>
@@ -4163,6 +4207,7 @@
 		  <False>
 			<Activate>
 			  <RegWrite Key="HKEY_USERS\.DEFAULT\Control Panel\Desktop\WindowMetrics" Value="MinAnimate" Type="REG_SZ" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" Value="VisualFXSetting" Type="REG_DWORD" Data="3"/>
 			</Activate>
 		  </False>
 		</System>
@@ -5136,6 +5181,30 @@
 		</System>
 	  </Item>
 
+	  <Item Type="CheckBox" Name="#显示透明登录背景（by 726b2d54 &amp; 闰月优葡）">
+		<Applicable>
+		  <OSVersion Compare=">=">10.0.18362</OSVersion>
+		  <FileExist FilePath="%SystemRoot%\System32\Windows.UI.Logon.dll"/>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" Value="DisableAcrylicBackgroundOnLogon" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" Value="DisableAcrylicBackgroundOnLogon" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" Value="DisableAcrylicBackgroundOnLogon"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
 	  <Item Type="CheckBox" Name="#登录界面默认打开小键盘（by IT之家）">
 		<System>
 		  <State>
@@ -5187,6 +5256,43 @@
 			</Activate>
 		  </False>
 		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁止用户在登录界面更改密码（by 726b2d54）">
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableChangePassword" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableChangePassword" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableChangePassword"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableChangePassword" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableChangePassword" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableChangePassword"/>
+			</Activate>
+		  </False>
+		</Default>
 	  </Item>
 	</Group>
 
@@ -12283,9 +12389,8 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#将Alt+Tab“多任务切换”调整为XP模式（by 闰月优葡 &amp; registryexpert）">
+	  <Item Type="CheckBox" Name="#将Alt+Tab“多任务切换”调整为传统模式（by 闰月优葡 &amp; registryexpert）">
 		<Applicable>
-		  <OSVersion Compare="&lt;">10.0.26100</OSVersion>
 		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
 		  <FileExist FilePath="%SystemRoot%\System32\ExplorerFrame.dll"/>
 		</Applicable>
@@ -15772,6 +15877,65 @@
 			<Activate>
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" Value="EncryptionContextMenu"/>
 			  <ExplorerNotify Type="Custom" msg="111" wParam="#A220" Explorer="True"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#在“发送到”右键菜单中不要显示可移动磁盘（by 726b2d54）">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
+		</Applicable>
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate Restart="Explorer">
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate Restart="Explorer">
+			  <RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu"/>
+			</Activate>
+		  </False>
+		</Default>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate Restart="Explorer">
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" Type="REG_DWORD" Data="1"/>
+			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate Restart="Explorer">
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu"/>
+			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDrivesInSendToMenu" SkipError="2"/>
 			</Activate>
 		  </False>
 		</System>
@@ -20194,8 +20358,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{81d4e9c9-1d3b-41bc-9e6c-4b40bf79e35e}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{81d4e9c9-1d3b-41bc-9e6c-4b40bf79e35e}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -20214,8 +20378,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{81d4e9c9-1d3b-41bc-9e6c-4b40bf79e35e}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{81d4e9c9-1d3b-41bc-9e6c-4b40bf79e35e}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -20243,8 +20407,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -20263,8 +20427,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{6A498709-E00B-4C45-A018-8F9E4081AE40}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -20875,8 +21039,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="NoTsf3Override4" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="NoTsf3Override4" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -20895,8 +21059,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="NoTsf3Override4" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{B115690A-EA02-48D5-A231-E3578D2FDF80}" Value="NoTsf3Override4" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -21047,8 +21211,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}\{6024B45F-5C54-11D4-B921-0080C882687E}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\CTF\TIP\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}\{6024B45F-5C54-11D4-B921-0080C882687E}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -21067,8 +21231,8 @@
 		  </State>
 		  <True>
 			<Activate>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
-			  <RegExist Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}\{6024B45F-5C54-11D4-B921-0080C882687E}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\CTF\TIP\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}" Value="DummyValue" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\SOFTWARE\Microsoft\Input\TSF\Tsf3Override\{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}\{6024B45F-5C54-11D4-B921-0080C882687E}" Value="NoTsf3Override2" Type="REG_DWORD" Data="1"/>
 			</Activate>
 		  </True>
 		  <False>
@@ -23146,6 +23310,31 @@
 		</System>
 	  </Item>
 
+	  <Item Type="CheckBox" Name="#*禁用Windows Firewall/Windows Defender Firewall（by 闰月优葡）">
+		<Applicable>
+		  <QueryServiceStart Name="MpsSvc"/>
+		</Applicable>
+		<System>
+		  <State>
+			<Applicable>
+			  <QueryServiceStart Name="MpsSvc" Type="4"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Activate>
+			  <SetServiceStart Name="MpsSvc" Type="4"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net stop MpsSvc" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <SetServiceStart Name="MpsSvc" Type="2"/>
+			  <ExplorerNotify Type="Cmd" Cmd="net start MpsSvc" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
 	  <Item Type="CheckBox" Name="#禁用Windows事件收集服务（by ZyperWave）">
 		<Applicable>
 		  <QueryServiceStart Name="WecSvc"/>
@@ -23257,7 +23446,7 @@
 		  </True>
 		  <False>
 			<Activate>
-			  <SetServiceStart Name="TrkWks" Type="2"/>
+			  <SetServiceStart Name="TrkWks" Type="3"/>
 			  <ExplorerNotify Type="Cmd" Cmd="net start TrkWks" SkipError="2"/>
 			</Activate>
 		  </False>
@@ -25755,8 +25944,8 @@
 	  </Item>
 	</Group>
 
-	<Group Name="#系统功能禁用（by 闰月优葡）">
-	  <Item Type="CheckBox" Name="#阻止运行注册表编辑器">
+	<Group Name="#系统功能禁用">
+	  <Item Type="CheckBox" Name="#阻止运行注册表编辑器（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\regedit.exe"/>
 		</Applicable>
@@ -25798,7 +25987,7 @@
 		</Default>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#阻止运行命令提示符">
+	  <Item Type="CheckBox" Name="#阻止运行命令提示符（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\cmd.exe"/>
 		</Applicable>
@@ -25840,7 +26029,7 @@
 		</Default>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#阻止运行任务管理器">
+	  <Item Type="CheckBox" Name="#阻止运行任务管理器（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\taskmgr.exe"/>
 		</Applicable>
@@ -25882,7 +26071,7 @@
 		</Default>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用文件夹选项">
+	  <Item Type="CheckBox" Name="#禁用文件夹选项（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
 		</Applicable>
@@ -25944,7 +26133,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁止映射或断开网络驱动器">
+	  <Item Type="CheckBox" Name="#禁止映射或断开网络驱动器（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
 		</Applicable>
@@ -26006,7 +26195,69 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用光盘刻录功能">
+	  <Item Type="CheckBox" Name="#禁用“回收站”的属性对话框（by 726b2d54）">
+		<Applicable>
+		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
+		</Applicable>
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate Restart="Explorer">
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate Restart="Explorer">
+			  <RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin"/>
+			</Activate>
+		  </False>
+		</Default>
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate Restart="Explorer">
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" Type="REG_DWORD" Data="1"/>
+			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" SkipError="2"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate Restart="Explorer">
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin"/>
+			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoPropertiesRecycleBin" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁用光盘刻录功能（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
 		</Applicable>
@@ -26068,7 +26319,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用文件资源管理器的右键菜单">
+	  <Item Type="CheckBox" Name="#禁用文件资源管理器的右键菜单（by 闰月优葡）">
 		<Current>
 		  <State>
 			<Applicable>
@@ -26127,7 +26378,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用任务栏的右键菜单">
+	  <Item Type="CheckBox" Name="#禁用任务栏的右键菜单（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
 		</Applicable>
@@ -26189,7 +26440,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#隐藏文件属性中的安全选项卡">
+	  <Item Type="CheckBox" Name="#隐藏文件属性中的安全选项卡（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
 		  <FileExist FilePath="%SystemRoot%\system32\aclui.dll"/>
@@ -26232,7 +26483,7 @@
 		</Default>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用控制面板">
+	  <Item Type="CheckBox" Name="#禁用控制面板（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\system32\ExplorerFrame.dll"/>
 		</Applicable>
@@ -26294,7 +26545,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用“运行”对话框">
+	  <Item Type="CheckBox" Name="#禁用“运行”对话框（by 闰月优葡）">
 		<Applicable>
 		  <Or>
 			<FileExist FilePath="%SystemRoot%\system32\taskmgr.exe"/>
@@ -26359,7 +26610,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#禁用Win+E和Win+R热键">
+	  <Item Type="CheckBox" Name="#禁用Win+E和Win+R热键（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
 		</Applicable>
@@ -26418,7 +26669,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#隐藏桌面上的所有图标和右键菜单">
+	  <Item Type="CheckBox" Name="#隐藏桌面上的所有图标和右键菜单（by 闰月优葡）">
 		<Applicable>
 		  <FileExist FilePath="%SystemRoot%\Explorer.exe"/>
 		</Applicable>
@@ -26472,6 +26723,117 @@
 			<Activate Restart="Explorer">
 			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDesktop"/>
 			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoDesktop" SkipError="2"/>
+			</Activate>
+		  </False>
+		</System>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁止注销用户（by 闰月优葡 &amp; 726b2d54）">
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" Type="REG_DWORD" Data="1"/>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate Restart="Explorer">
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate Restart="Explorer">
+			  <RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff"/>
+			  <RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" SkipError="2"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" Type="REG_DWORD" Data="1"/>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" Type="REG_DWORD" Data="1"/>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff"/>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" SkipError="2"/>
+			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="StartMenuLogOff" SkipError="2"/>
+			  <RegDelete Key="HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" Value="NoLogoff" SkipError="2"/>
+			</Activate>
+		  </False>
+		</Default>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁止锁定计算机（by 726b2d54）">
+		<Current>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation" SkipError="2"/>
+			</Activate>
+		  </False>
+		</Current>
+		<Default>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_USERS\DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation"/>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="DisableLockWorkstation" SkipError="2"/>
+			</Activate>
+		  </False>
+		</Default>
+	  </Item>
+
+	  <Item Type="CheckBox" Name="#禁止切换用户（by 726b2d54）">
+		<System>
+		  <State>
+			<Applicable>
+			  <RegExist Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="HideFastUserSwitching" Type="REG_DWORD" Data="1"/>
+			</Applicable>
+		  </State>
+		  <True>
+			<Warning>#此选项将导致系统功能受损！</Warning>
+			<Activate>
+			  <RegWrite Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="HideFastUserSwitching" Type="REG_DWORD" Data="1"/>
+			</Activate>
+		  </True>
+		  <False>
+			<Activate>
+			  <RegDelete Key="HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" Value="HideFastUserSwitching"/>
 			</Activate>
 		  </False>
 		</System>
@@ -27195,7 +27557,7 @@
 		</System>
 	  </Item>
 
-	  <Item Type="CheckBox" Name="#设备管理器显示隐藏设备时显示未连接的设备（by 闰月优葡）">
+	  <Item Type="CheckBox" Name="#*设备管理器显示隐藏设备时显示未连接的设备（by 闰月优葡）">
 		<Applicable>
 		  <OSVersion Compare="&lt;">6.2</OSVersion>
 		  <FileExist FilePath="%SystemRoot%\System32\devmgr.dll"/>
